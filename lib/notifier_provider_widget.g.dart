@@ -6,9 +6,11 @@ part of 'notifier_provider_widget.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$clickCountHash() => r'dd6750ead0ef05d5d4cda639531db3bc33ed5009';
+String _$clickCountHash() => r'c8f8e8ef3c299f3f346fdc769f252b44a60bea57';
 
-/// See also [ClickCount].
+///生成的provider变量名为：ClickCount（当前classname） + Provider
+///
+/// Copied from [ClickCount].
 @ProviderFor(ClickCount)
 final clickCountProvider =
     AutoDisposeNotifierProvider<ClickCount, int>.internal(
