@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_riverpod_demo/main.dart";
 
-import "count_provider.dart";
+// import "count_provider.dart";
 import "notifier_provider_widget.dart";
 
 ///  author : zhc 2025/7/4 11:26
@@ -14,7 +14,7 @@ class CountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final int count = ref.watch(clickCountProvider2);
+    final int count = ref.watch(clickCountProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text("计数调整")),
@@ -32,7 +32,7 @@ class CountPage extends ConsumerWidget {
                 // ref.read(clickCountProvider.notifier).state++;
 
                 //notifier的使用方式
-                ref.read(clickCountProvider2.notifier).increment();
+                ref.read(clickCountProvider.notifier).increment();
 
 
               },
