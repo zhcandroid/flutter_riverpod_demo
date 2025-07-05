@@ -26,15 +26,12 @@ class CountPage extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 //state 这个字段 同样是返回的T
-                //
                 // int count = ref.read(clickCountProvider.notifier).state;
                 //count++; 这么写无效
                 // ref.read(clickCountProvider.notifier).state++;
 
                 //notifier的使用方式
                 ref.read(clickCountProvider.notifier).increment();
-
-
               },
               child: const Text(
                 "点击增加计数",
@@ -47,3 +44,4 @@ class CountPage extends ConsumerWidget {
     );
   }
 }
+

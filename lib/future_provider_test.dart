@@ -2,9 +2,6 @@ import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-///  author : zhc 2025/7/4 13:02
-///  desc   :
-
 //只有在watch当前provider时 才会执行ref的回调方法
 final articleFutureProvider = FutureProvider.autoDispose(
   (ref) async {
@@ -14,6 +11,16 @@ final articleFutureProvider = FutureProvider.autoDispose(
         .then((res) => res.data);
   }
 );
+
+//使用@riverpod 实现articleFutureProvider
+// @riverpod
+// Future<String> getArticleData() async {
+//   print("articleFutureProvider执行了");
+//   return await Dio()
+//       .get('https://www.wanandroid.com/article/list/0/json')
+//       .then((res) => res.data.toString());
+// }
+
 
 class FutureProviderWidget extends ConsumerWidget {
   const FutureProviderWidget({super.key});
