@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_demo/count_page.dart';
 import 'package:flutter_riverpod_demo/stream_provider_widget.dart';
+import 'package:flutter_riverpod_demo/todo/to_do_list_widget.dart';
 
 import 'count_provider.dart';
 import 'future_provider_test.dart';
@@ -68,6 +69,18 @@ class HomeApp extends ConsumerWidget {
               },
               child: const Text("跳转到StreamProvider页面"),
             ),
+
+            const SizedBox(height: 50),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => TodoListPage()));
+              },
+              child: const Text("跳转到TodoList页面"),
+            ),
+
           ],
         ),
       ),
