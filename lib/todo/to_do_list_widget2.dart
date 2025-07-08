@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'to_do_list_widget2.g.dart';
 
 // 1. Todo数据模型
 class Todo {
@@ -31,7 +34,9 @@ class Todo {
 }
 
 // 2. 分页Provider
-class TodoListNotifier extends AutoDisposeAsyncNotifier<List<Todo>> {
+//flutter pub run build_runner build
+@riverpod
+class TodoListNotifier extends _$TodoListNotifier{
   int _page = 1;
   bool _hasMore = true;
   final int _pageSize = 20;
@@ -87,9 +92,9 @@ class TodoListNotifier extends AutoDisposeAsyncNotifier<List<Todo>> {
     state = AsyncValue.data(await _fetchTodos());
   }
 }
+// final todoListProvider =
+// AutoDisposeAsyncNotifierProvider<TodoListNotifier, List<Todo>>(TodoListNotifier.new);
 
-final todoListProvider =
-    AutoDisposeAsyncNotifierProvider<TodoListNotifier, List<Todo>>(TodoListNotifier.new);
 
 // 3. 列表UI，支持下拉刷新和上拉加载更多
 class TodoListPage extends ConsumerWidget {
@@ -97,8 +102,8 @@ class TodoListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoListAsync = ref.watch(todoListProvider);
-    final notifier = ref.read(todoListProvider.notifier);
+    final todoListAsync = ref.watch(todoListNotifierProvider);//todoListNotifierProvider
+    final notifier = ref.read(todoListNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Todo 列表')),
