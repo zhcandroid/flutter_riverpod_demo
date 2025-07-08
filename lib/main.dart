@@ -6,17 +6,24 @@ import 'package:flutter_riverpod_demo/todo/to_do_list_widget.dart';
 
 import 'count_provider.dart';
 import 'future_provider_test.dart';
+import 'theme/theme_provider.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: HomeApp());
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp(
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ref.watch(themeModeProvider),
+      home: HomeApp(),
+    );
   }
 }
 
@@ -79,6 +86,29 @@ class HomeApp extends ConsumerWidget {
                 ).push(MaterialPageRoute(builder: (_) => TodoListPage()));
               },
               child: const Text("跳转到TodoList页面"),
+            ),
+
+            const SizedBox(height: 50),
+
+            // 主题切换按钮
+            ElevatedButton(
+              onPressed: () {
+                final mode = ref.read(themeModeProvider.notifier).state;
+                if (mode == ThemeMode.light) {
+                  ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
+                } else if (mode == ThemeMode.dark) {
+                  ref.read(themeModeProvider.notifier).state = ThemeMode.system;
+                } else {
+                  ref.read(themeModeProvider.notifier).state = ThemeMode.light;
+                }
+              },
+              child: Text("切换主题（当前： ${
+                {
+                  ThemeMode.light: '明亮',
+                  ThemeMode.dark: '深色',
+                  ThemeMode.system: '跟随系统',
+                }[ref.watch(themeModeProvider)]
+              }）"),
             ),
 
           ],
