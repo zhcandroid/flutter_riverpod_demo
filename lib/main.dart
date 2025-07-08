@@ -21,7 +21,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ref.watch(themeModeProvider),
+      themeMode: ref.watch(themeModeNotifierProvider),
       home: HomeApp(),
     );
   }
@@ -93,21 +93,14 @@ class HomeApp extends ConsumerWidget {
             // 主题切换按钮
             ElevatedButton(
               onPressed: () {
-                final mode = ref.read(themeModeProvider.notifier).state;
-                if (mode == ThemeMode.light) {
-                  ref.read(themeModeProvider.notifier).state = ThemeMode.dark;
-                } else if (mode == ThemeMode.dark) {
-                  ref.read(themeModeProvider.notifier).state = ThemeMode.system;
-                } else {
-                  ref.read(themeModeProvider.notifier).state = ThemeMode.light;
-                }
+                ref.read(themeModeNotifierProvider.notifier).nextMode();
               },
               child: Text("切换主题（当前： ${
                 {
                   ThemeMode.light: '明亮',
                   ThemeMode.dark: '深色',
                   ThemeMode.system: '跟随系统',
-                }[ref.watch(themeModeProvider)]
+                }[ref.watch(themeModeNotifierProvider)]
               }）"),
             ),
 
