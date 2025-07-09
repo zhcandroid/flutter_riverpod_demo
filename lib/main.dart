@@ -8,9 +8,29 @@ import 'count_provider.dart';
 import 'future_provider_test.dart';
 import 'theme/theme_provider.dart';
 import 'theme/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(ProviderScope(child: const MyApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  // 优先读取字符串，兼容旧index
+  final themeStr = prefs.getString('themeMode');
+  ThemeMode initialThemeMode;
+  if (themeStr != null) {
+    initialThemeMode = ThemeModeNotifier.stringToMode(themeStr);
+  } else {
+    final themeIndex = prefs.getInt('themeMode') ?? ThemeMode.system.index;
+    initialThemeMode = ThemeMode.values[themeIndex];
+  }
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        themeModeNotifierProvider.overrideWith(() => ThemeModeNotifier(initialThemeMode)),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
