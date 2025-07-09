@@ -13,19 +13,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  // 优先读取字符串，兼容旧index
   final themeStr = prefs.getString('themeMode');
-  ThemeMode initialThemeMode;
-  if (themeStr != null) {
-    initialThemeMode = ThemeModeNotifier.stringToMode(themeStr);
-  } else {
-    final themeIndex = prefs.getInt('themeMode') ?? ThemeMode.system.index;
-    initialThemeMode = ThemeMode.values[themeIndex];
-  }
-
+  ThemeMode initialThemeMode =  ThemeModeNotifier.stringToMode(themeStr);
   runApp(
     ProviderScope(
       overrides: [
+        /// 使用overrideWith来覆盖themeModeNotifierProvider
+        /// 在应用启动时，可以尽快使用主题，优化体验
         themeModeNotifierProvider.overrideWith(() => ThemeModeNotifier(initialThemeMode)),
       ],
       child: const MyApp(),
