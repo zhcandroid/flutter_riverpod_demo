@@ -120,13 +120,20 @@ class TodoListPage extends ConsumerWidget {
               itemCount: todos.length,
               itemBuilder: (context, index) {
                 final todo = todos[index];
-                return ListTile(
-                  leading: Icon(
-                    todo.completed == true ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: todo.completed == true ? Colors.green : null,
+                return Listener(
+                  // 添加Listener以处理点击事件
+                  onPointerDown: (PointerDownEvent event){
+
+
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      todo.completed == true ? Icons.check_box : Icons.check_box_outline_blank,
+                      color: todo.completed == true ? Colors.green : null,
+                    ),
+                    title: Text(todo.title ?? ''),
+                    subtitle: Text('ID: ${todo.id}'),
                   ),
-                  title: Text(todo.title ?? ''),
-                  subtitle: Text('ID: ${todo.id}'),
                 );
               },
             ),
