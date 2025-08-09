@@ -37,7 +37,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeModeNotifierProvider);
-    Log.i('当前主题:${theme.toString()} ');
+    LogUtils.i('当前主题:${theme.toString()} ');
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       theme: AppTheme.lightTheme,

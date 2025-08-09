@@ -198,7 +198,7 @@ class DevelopmentFilter extends LogFilter {
 }
 
 // 简化调用接口
-class Log {
+class LogUtils {
   static void v(dynamic message, [dynamic error, StackTrace? stackTrace]) =>
       AppLogger.v(message, error, stackTrace);
 

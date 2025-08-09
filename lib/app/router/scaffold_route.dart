@@ -12,17 +12,24 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       // appBar: AppBar(),
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: navigationShell.currentIndex,
-        //点击时去除移动效果
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mine'),
-        ],
-        onTap: (index) => _onTap(context, index),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          currentIndex: navigationShell.currentIndex,
+          //点击时去除移动效果
+          type: BottomNavigationBarType.fixed,
+
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+            BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mine'),
+          ],
+          onTap: (index) => _onTap(context, index),
+        ),
       ),
     );
   }
