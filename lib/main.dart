@@ -5,6 +5,7 @@ import 'package:flutter_riverpod_demo/stream_provider_widget.dart';
 import 'package:flutter_riverpod_demo/todo/to_do_list_widget.dart';
 
 import 'app/router/app_router.dart';
+import 'core/provider/navigator_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
 import 'core/utils/logger.dart';
@@ -36,9 +37,14 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final navigatorKey = ref.watch(navigatorKeyProvider);
+
     final theme = ref.watch(themeModeNotifierProvider);
     LogUtils.i('当前主题:${theme.toString()} ');
+
     final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -46,6 +52,7 @@ class MyApp extends ConsumerWidget {
       themeMode: theme,
       //配置路由
       routerConfig: router,
+
     );
   }
 }
