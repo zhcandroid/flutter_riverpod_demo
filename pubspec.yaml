@@ -38,6 +38,8 @@ dependencies:
   riverpod_annotation: ^2.6.1
   dio: ^5.8.0+1
   shared_preferences: ^2.5.3
+  #日志输出
+  logger: ^2.6.1
 
 
 dev_dependencies:

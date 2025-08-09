@@ -4,23 +4,25 @@ import 'package:flutter_riverpod_demo/count_page.dart';
 import 'package:flutter_riverpod_demo/stream_provider_widget.dart';
 import 'package:flutter_riverpod_demo/todo/to_do_list_widget.dart';
 
+import 'core/theme/app_theme.dart';
+import 'core/theme/theme_provider.dart';
 import 'count_provider.dart';
 import 'future_provider_test.dart';
-import 'theme/theme_provider.dart';
-import 'theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final themeStr = prefs.getString('themeMode');
-  ThemeMode initialThemeMode =  ThemeModeNotifier.stringToMode(themeStr);
+  ThemeMode initialThemeMode = ThemeModeNotifier.stringToMode(themeStr);
   runApp(
     ProviderScope(
       overrides: [
         /// 使用overrideWith来覆盖themeModeNotifierProvider
         /// 在应用启动时，可以尽快使用主题，优化体验
-        themeModeNotifierProvider.overrideWith(() => ThemeModeNotifier(initialThemeMode)),
+        themeModeNotifierProvider.overrideWith(
+          () => ThemeModeNotifier(initialThemeMode),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -73,9 +75,9 @@ class HomeApp extends ConsumerWidget {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => FutureProviderWidget()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => FutureProviderWidget()),
+                );
               },
               child: const Text("跳转到FutureProvider页面"),
             ),
@@ -84,9 +86,9 @@ class HomeApp extends ConsumerWidget {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => StreamProviderWidget()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => StreamProviderWidget()),
+                );
               },
               child: const Text("跳转到StreamProvider页面"),
             ),
@@ -109,15 +111,10 @@ class HomeApp extends ConsumerWidget {
               onPressed: () {
                 ref.read(themeModeNotifierProvider.notifier).nextMode();
               },
-              child: Text("切换主题（当前： ${
-                {
-                  ThemeMode.light: '明亮',
-                  ThemeMode.dark: '深色',
-                  ThemeMode.system: '跟随系统',
-                }[ref.watch(themeModeNotifierProvider)]
-              }）"),
+              child: Text(
+                "切换主题（当前： ${{ThemeMode.light: '明亮', ThemeMode.dark: '深色', ThemeMode.system: '跟随系统'}[ref.watch(themeModeNotifierProvider)]}）",
+              ),
             ),
-
           ],
         ),
       ),
