@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
-import "../../data/models/user_model.dart";
+import "../../shared/models/user_model.dart";
 import "dio_service.dart";
 
 class TestDioService extends ConsumerStatefulWidget {

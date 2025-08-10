@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_demo/app/router/route_guards.dart';
 import 'package:flutter_riverpod_demo/app/router/route_paths.dart';
 import 'package:flutter_riverpod_demo/app/router/scaffold_route.dart';
-import 'package:flutter_riverpod_demo/pages/chat_page.dart';
-import 'package:flutter_riverpod_demo/pages/home_page.dart';
-import 'package:flutter_riverpod_demo/pages/login_page.dart';
-import 'package:flutter_riverpod_demo/pages/mine_page.dart';
-import 'package:flutter_riverpod_demo/pages/news_page.dart';
+import 'package:flutter_riverpod_demo/features/home/chat_page.dart';
+import 'package:flutter_riverpod_demo/features/home/home_page.dart';
+import 'package:flutter_riverpod_demo/features/login/login_page.dart';
+import 'package:flutter_riverpod_demo/features/mine/mine_page.dart';
+import 'package:flutter_riverpod_demo/features/news/news_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../pages/error_screen.dart';
-import '../../pages/splash_screen.dart';
+import '../../shared/widgets/error_screen.dart';
+import '../../features/splash_screen.dart';
 
 
 //route是和业务强相关的，不适合放在core中

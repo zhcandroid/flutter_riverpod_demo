@@ -1,7 +1,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_demo/core/network/dio_service.dart';
-import 'package:flutter_riverpod_demo/data/models/user_model.dart';
+import 'package:flutter_riverpod_demo/shared/models/user_model.dart';
 
 import '../../core/errors/network_err.dart';
 import '../../core/network/api_response.dart';

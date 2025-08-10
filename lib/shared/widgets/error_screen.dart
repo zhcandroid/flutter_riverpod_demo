@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
-
-///  author : zhc 2025/8/9 14:09
-///  desc   :
+///  desc   : 通用错误页面
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key});
 
