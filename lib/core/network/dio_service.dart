@@ -53,7 +53,6 @@ class DioService {
   }
 
   void _initializeDio() {
-    _dio = Dio();
     // 使用ApiConfig的配置初始化Dio
     _dio = Dio(ApiConfig.baseOptions);
     // 添加日志拦截器（如有需要）

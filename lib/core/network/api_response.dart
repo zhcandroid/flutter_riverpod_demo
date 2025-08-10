@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter_riverpod_demo/core/utils/logger.dart';
 
 /// API响应状态码
 enum ApiStatus {
@@ -69,12 +70,14 @@ class ApiResponse<T> {
         T Function(dynamic json)? fromJson,
       }) {
     final data = response.data;
-    if (data is Map<String, dynamic>) {
-      final code = data['code'] as int? ?? -1;
-      final status = ApiStatus.fromCode(code);
-      final message = data['message'] as String?;
-      final responseData = data['data'];
+    LogUtils.i("11111");
 
+    if (data is Map<String, dynamic>) {
+      final code = data['errorCode'] as int? ?? -1;
+      final status = ApiStatus.fromCode(code);
+      final message = data['errorMsg'] as String?;
+      final responseData = data['data'];
+      LogUtils.i("code:$code");
       return ApiResponse(
         status: status,
         data: fromJson != null ? fromJson(responseData) : responseData as T?,
@@ -83,7 +86,7 @@ class ApiResponse<T> {
         rawResponse: response,
       );
     }
-    return ApiResponse.error('Invalid response format', rawResponse: response);
+    return ApiResponse.error('响应格式错误', rawResponse: response);
   }
 }
 

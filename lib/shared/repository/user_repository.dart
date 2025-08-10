@@ -5,7 +5,7 @@ import 'package:flutter_riverpod_demo/shared/models/user_model.dart';
 
 // 用户 Repository
 final userRepositoryProvider = Provider<UserRepository>((ref) {
-  final dioService = ref.watch(dioServiceProvider);
+  final dioService = ref.read(dioServiceProvider);
   return UserRepository(dioService);
 });
 
@@ -15,6 +15,14 @@ class UserRepository {
   final DioService _dioService;
 
   UserRepository(this._dioService);
+
+  Future getContent() async {
+    final response = await _dioService.get(
+      '/harmony/index/json',
+      // fromJson: (json) => json as String,
+    );
+    return response.data ?? 'No Content';
+  }
 
   Future<UserModel> login(String email, String password) async {
     final response = await _dioService.post<Map<String, dynamic>>(

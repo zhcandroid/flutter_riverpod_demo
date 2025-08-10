@@ -2,7 +2,7 @@ import 'package:dio/dio.dart' as dio;
 
 /// API配置管理类
 class ApiConfig {
-  static const String baseUrl = 'https://api.example.com';
+  static const String baseUrl = 'https://www.wanandroid.com';
   static const int connectTimeout = 15000;
   static const int receiveTimeout = 15000;
   static const int sendTimeout = 15000;

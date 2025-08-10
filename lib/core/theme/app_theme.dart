@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 class AppTheme {
   // 亮色主题 - 更柔和的现代风格
   static ThemeData lightTheme = ThemeData(
-    useMaterial3: true, // 启用Material 3设计
+    // 启用Material 3设计
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFF0066CC),    // 主色：更深的科技蓝
-      secondary: Color(0xFF5CC3FF),   // 强调色：清新的亮蓝
-      surface: Colors.white,          // 表面色
-      background: Color(0xFFF8FAFD),  // 背景：极浅灰蓝
-      onPrimary: Colors.white,        // 主色上的文字
-      onBackground: Color(0xFF1E1E1E),// 背景上的文字
+      // 主色：更深的科技蓝
+      primary: Color(0xFF0066CC),
+      //辅助品牌色，次重要元素	浮动按钮、开关滑块
+      secondary: Color(0xFF5CC3FF),
+      // "表面"元素的背景色（卡片、对话框等）	Card, Dialog, BottomSheet
+      surface: Colors.white,
+      // 显示在 primary 颜色上的内容色（文字/图标）	主色按钮上的文字
+      onPrimary: Colors.white,
+      //显示在 surface 颜色上的内容色	卡片内文字
+      onSurface: Color(0xFF1E1E1E),
+
     ),
     scaffoldBackgroundColor: const Color(0xFFF8FAFD),
     appBarTheme: const AppBarTheme(
@@ -25,9 +31,9 @@ class AppTheme {
       bodyLarge: TextStyle(color: Color(0xFF1E1E1E), fontSize: 16),
       bodyMedium: TextStyle(color: Color(0xFF454545), fontSize: 14),
       titleLarge: TextStyle(
-          color: Color(0xFF1A1A1A),
-          fontWeight: FontWeight.w600,
-          fontSize: 20
+        color: Color(0xFF1A1A1A),
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -43,14 +49,17 @@ class AppTheme {
       color: Colors.white,
       elevation: 1.5,
       surfaceTintColor: Colors.white,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     dividerTheme: const DividerThemeData(
-        color: Color(0xFFEEEEEE),
-        thickness: 1,
-        space: 0
+      color: Color(0xFFEEEEEE),
+      thickness: 1,
+      space: 0,
+    ),
+
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: Color(0xFF0066CC), // 自定义背景色
+      contentTextStyle: TextStyle(color: Colors.white), // 文字颜色
     ),
   );
 
@@ -59,12 +68,10 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
-      primary: Color(0xFF5CC3FF),      // 主色：柔和的亮蓝
-      secondary: Color(0xFF8ADAFF),    // 强调色：更亮的蓝
-      surface: Color(0xFF1E2A38),      // 表面色：深蓝灰
-      background: Color(0xFF121A24),   // 背景：深蓝黑
-      onPrimary: Color(0xFF121212),    // 主色上的文字
-      onBackground: Color(0xFFEDEDED), // 背景上的文字
+      primary: Color(0xFF5CC3FF),
+      secondary: Color(0xFF8ADAFF),
+      surface: Color(0xFF1E2A38),
+      onPrimary: Color(0xFF121212),
     ),
     scaffoldBackgroundColor: const Color(0xFF121A24),
     appBarTheme: const AppBarTheme(
@@ -77,9 +84,9 @@ class AppTheme {
       bodyLarge: TextStyle(color: Color(0xFFEDEDED), fontSize: 16),
       bodyMedium: TextStyle(color: Color(0xFFB0B0B0), fontSize: 14),
       titleLarge: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-          fontSize: 20
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -94,18 +101,21 @@ class AppTheme {
       color: Color(0xFF1E2A38),
       elevation: 2,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     dividerTheme: const DividerThemeData(
-        color: Color(0xFF2D3A48),
-        thickness: 1,
-        space: 0
+      color: Color(0xFF2D3A48),
+      thickness: 1,
+      space: 0,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xFF5CC3FF),
-        foregroundColor: Colors.black87
+      backgroundColor: Color(0xFF5CC3FF),
+      foregroundColor: Colors.black87,
+    ),
+
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: Color(0xFF5CC3FF), // 自定义背景色
+      contentTextStyle: TextStyle(color: Colors.white), // 文字颜色
     ),
   );
 }

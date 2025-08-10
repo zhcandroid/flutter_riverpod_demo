@@ -8,7 +8,8 @@ import 'core/utils/logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ThemeMode initTheme = await ThemeModeNotifier.getNavThemeModel();
+  // ThemeMode initTheme = await ThemeModeNotifier.getNavThemeModel();
+  ThemeMode initTheme = ThemeMode.light;
   runApp(
     ProviderScope(
       overrides: [

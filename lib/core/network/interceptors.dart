@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router/app_router.dart';
+import '../../app/router/router_service.dart';
 import '../auth/auth_provider.dart';
 
 //API 通用拦截器
@@ -37,8 +38,8 @@ class ApiInterceptor extends Interceptor {
     // 处理业务状态码
     if (response.data is Map<String, dynamic>) {
       final data = response.data as Map<String, dynamic>;
-      final code = data['code'];
-      final message = data['message'] ?? '未知错误';
+      final code = data['errorCode'];
+      final message = data['errorMessage'] ?? '未知错误';
 
       if (code != 0) {
         // 处理特定业务错误码
@@ -64,6 +65,11 @@ class ApiInterceptor extends Interceptor {
         );
         return;
       }
+
+      // 通过路由服务显示错误信息
+      final routerService = _ref.read(routerServiceProvider);
+      routerService.showSnackBar("请求成功");
+
     }
 
     super.onResponse(response, handler);
@@ -72,7 +78,6 @@ class ApiInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     String errorMessage = '网络请求失败';
-
     if (err.type == DioExceptionType.connectionTimeout ||
         err.type == DioExceptionType.sendTimeout ||
         err.type == DioExceptionType.receiveTimeout) {
@@ -95,8 +100,10 @@ class ApiInterceptor extends Interceptor {
     } else {
       errorMessage = '网络连接失败，请检查网络设置';
     }
+    // 通过路由服务显示错误信息
+    final routerService = _ref.read(routerServiceProvider);
+    routerService.showSnackBar(errorMessage);
 
-    //snackbar('错误', errorMessage);
     super.onError(err, handler);
   }
 
