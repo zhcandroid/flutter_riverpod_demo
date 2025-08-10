@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_demo/app/router/route_guards.dart';
 import 'package:flutter_riverpod_demo/app/router/route_paths.dart';
-import 'package:flutter_riverpod_demo/app/router/scaffold_route.dart';
+import 'package:flutter_riverpod_demo/scaffold_main.dart';
 import 'package:flutter_riverpod_demo/features/home/chat_page.dart';
 import 'package:flutter_riverpod_demo/features/home/home_page.dart';
 import 'package:flutter_riverpod_demo/features/login/login_page.dart';
@@ -43,7 +43,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             context, state, navigationShell
         ) {
           //返回共享页面widget
-          return ScaffoldWithNavBar(navigationShell: navigationShell);
+          return MainPage( navigationShell);
         },
         branches: [
           //4 个 table

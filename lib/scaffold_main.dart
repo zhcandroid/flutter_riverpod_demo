@@ -1,24 +1,35 @@
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:flutter_riverpod_demo/core/utils/logger.dart";
 import "package:go_router/go_router.dart";
 
-// 带有底部导航的脚手架
-class ScaffoldWithNavBar extends StatelessWidget {
-  const ScaffoldWithNavBar({required this.navigationShell, super.key});
-
+// Main Page Scaffold with Bottom Navigation Bar
+class MainPage extends ConsumerStatefulWidget {
   final StatefulNavigationShell navigationShell;
+  const MainPage(this.navigationShell, {super.key});
+
+  @override
+  ConsumerState<MainPage> createState() => _MainPageState();
+}
+class _MainPageState extends ConsumerState<MainPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    // 初始化时打印当前索引
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
-      body: navigationShell,
+      body: widget.navigationShell,
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           splashFactory: NoSplash.splashFactory,
           highlightColor: Colors.transparent,
         ),
         child: BottomNavigationBar(
-          currentIndex: navigationShell.currentIndex,
+          currentIndex: widget.navigationShell.currentIndex,
           //点击时去除移动效果
           type: BottomNavigationBarType.fixed,
 
@@ -36,10 +47,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   // 切换标签页
   void _onTap(BuildContext context, int index) {
-    navigationShell.goBranch(
+    widget.navigationShell.goBranch(
       index,
       // 保留各分支状态
-      initialLocation: index == navigationShell.currentIndex,
+      initialLocation: index == widget.navigationShell.currentIndex,
     );
   }
+
 }
+
