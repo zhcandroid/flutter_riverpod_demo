@@ -14,21 +14,24 @@ import '../../shared/widgets/error_screen.dart';
 import '../../features/splash_screen.dart';
 
 
-//route是和业务强相关的，不适合放在core中
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
     //初始化路由
     initialLocation: RoutePaths.splash,
-    //
+    //路由拦截
     redirect: (context, state) => RouteGuards.authGuard(context, state, ref),
     routes: [
       GoRoute(
         path: RoutePaths.splash,
+        name: "splash",
         builder: (_, __) => const SplashScreen(),
+        // 完全跳过重定向逻辑
+        redirect: (_,state) => null,
       ),
       GoRoute(
         path: RoutePaths.login,
+        name: RoutePaths.login,
         pageBuilder:
             (_, state) => CustomTransitionPage(
               child: const LoginPage(),

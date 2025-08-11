@@ -4,6 +4,8 @@ import 'package:logger/logger.dart';
 class AppLogger {
   static final AppLogger _instance = AppLogger._internal();
   Logger? _logger;
+
+  /// 当前日志级别，打包发布时默认为Warning
   Level _currentLevel = kReleaseMode ? Level.warning : Level.verbose;
 
   factory AppLogger() => _instance;
